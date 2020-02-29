@@ -1,5 +1,5 @@
 const rp = require('request-promise');
-const {CMC_PRO_API_KEY, SLACK_WEBHOOK} = require('config.js')
+const {CMC_PRO_API_KEY, SLACK_WEBHOOK} = require('./config.js')
 
 const requestOptions = {
   method: 'GET',
@@ -16,6 +16,8 @@ const requestOptions = {
   gzip: true
 };
 
+console.log(CMC_PRO_API_KEY);
+console.log(SLACK_WEBHOOK);
 
 rp(requestOptions).then(response => {
   console.log('[', response.status.timestamp, '] Bitcoin Price:', response.data[0].quote.USD.price);
@@ -27,7 +29,6 @@ rp(requestOptions).then(response => {
     },
     json: true,
   }
-  // slackOptions.body.text = response.data[0].quote.USD.price;
   rp(slackOptions);
 }).catch((err) => {
   console.log('API call error:', err.message);
