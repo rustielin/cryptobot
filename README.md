@@ -25,4 +25,24 @@ module.exports = {
 
 ```
 
-4. run `npm install` and `node btc_bot.js`. It should send the output to your slack channel.
+4. we rely on env variable `CSV_PATH` to dump our BTC price data. export it now: e.g. `export CSV_PATH="$HOME/public_html/btc-usd.csv"`
+5. run `npm install` and `node btc_bot.js`. It should start appending the price of bitcoin to the csv.
+
+## Scraper
+
+Need python3 env to run all our graphing stuff, easiest way with:
+
+```
+python3 -m venv venv
+pip install -r requirements.txt
+```
+
+Simple e2e test:
+
+```
+./run.sh
+```
+
+* Run `node btc_bot.js` to dump to csv
+* Creates the graph with `write_graph.py` from csv
+* Sends the graph to Slack with `send_slack.js`
