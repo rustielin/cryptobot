@@ -7,10 +7,10 @@ const slackOptions = {
     uri: SLACK_WEBHOOK,
     body: {
         // hardcoded for now lol
-        text: "text https://www.ocf.berkeley.edu/~rustielin/btc-usd.png",
-        fallback: "fallback https://www.ocf.berkeley.edu/~rustielin/btc-usd.png",
-        image_url: 'https://www.ocf.berkeley.edu/~rustielin/btc-usd.png',
-        thumb_url: 'https://www.ocf.berkeley.edu/~rustielin/btc-usd.png',
+        text: "text: " + process.env.PNG_PATH,
+        fallback: "fallback: " + process.env.PNG_PATH,
+        image_url: process.env.PNG_PATH,
+        thumb_url: process.env.PNG_PATH,
     },
     json: true,
 }
