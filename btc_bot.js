@@ -2,7 +2,8 @@ const rp = require('request-promise');
 const fs = require('fs')
 var csvWriter = require('csv-write-stream')
 
-const {CMC_PRO_API_KEY} = require('./config.js')
+const {CMC_PRO_API_KEYS} = require('./config.js')
+const RAND_KEY = CMC_PRO_API_KEYS[Math.floor(Math.random() * CMC_PRO_API_KEYS.length)]
 
 const CSV_PATH = process.env.CSV_PATH;
 
@@ -22,7 +23,7 @@ const requestOptions = {
     'convert': 'USD'
   },
   headers: {
-    'X-CMC_PRO_API_KEY': CMC_PRO_API_KEY
+    'X-CMC_PRO_API_KEY': RAND_KEY
   },
   json: true,
   gzip: true
