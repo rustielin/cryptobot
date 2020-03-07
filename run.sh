@@ -41,6 +41,6 @@ do
 
     # node send_slack.js >> $LOG_PATH
 
-    log "Sleeping $SLEEP_SECS seconds..."
+    log "Sleeping $SLEEP_SECS seconds..." >> $LOG_PATH
     sleep $SLEEP_SECS
 done
