@@ -24,11 +24,12 @@ pricedf = pricedf[(pricedf.index >= end ) & (pricedf.index <= start)]
 fig, ax = plt.subplots(figsize=(10, 10))
 
 # make the graph
-g = sns.lineplot(ax=ax, x=pricedf.index, y="price", marker="o", data=pricedf)
-ax.set_xticks(pricedf.index) # not sure if needed
-ax.set_xticklabels([x.strftime('%Y-%m-%d\n %H:%M:%S') for x in pricedf.index], rotation=50)
-plt.title('Price of BTC over time')
+g = sns.lineplot(ax=ax, x=pricedf.index, y="price", data=pricedf)
+
+sub_index = pricedf.index[::60] #  roughly every hour
+ax.set_xticks(sub_index) # not sure if needed
+ax.set_xticklabels([x.strftime('%Y-%m-%d\n %H:%M:%S') for x in sub_index], rotation=50)
+plt.title("Price of BTC over time \nlast updated {}".format(pricedf.index[-1]))
 
 # write to file and log
 fig.savefig(PNG_PATH)
-print(pricedf)
