@@ -48,4 +48,4 @@ Simple e2e test:
 * Creates the graph with `write_graph.py` from csv
 * Sends the graph to Slack with `send_slack.js`, on the crossing of some threshold. Or, simply query the public directory GET: `$HOME/public_html/$PNG_PATH`
 
-NOTE: If you're running on the OCF, install node via nvm.
+NOTE: If you're running on the OCF, install node via nvm, and use `nohup` to execute the main script: e.g. `nohup ./run.sh &`

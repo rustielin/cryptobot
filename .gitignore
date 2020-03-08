@@ -9,3 +9,6 @@ venv
 
 # test outputs
 test.png
+
+# nohup output
+nohup.out
