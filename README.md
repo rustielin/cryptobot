@@ -49,3 +49,15 @@ Simple e2e test:
 * Sends the graph to Slack with `send_slack.js`, on the crossing of some threshold. Or, simply query the public directory GET: `$HOME/public_html/$PNG_PATH`
 
 NOTE: If you're running on the OCF, install node via nvm, and use `nohup` to execute the main script: e.g. `nohup ./run.sh &`
+
+## Testing
+
+After getting your dev environment (on the OCF) set up, you can run some smaller e2e tests using some flags:
+
+```
+./run.sh -idv
+```
+
+This will run a dry run `-d` of the script, print verbose `-v` output to stdout (e.g. the image URL), and dump you into python interactive `-i` mode after execution so you can play around. The image created here has a randomly generated name.
+
+Assuming `run.sh` itself has no bugs, this essentially tests the functionality of `write_graph.py`.
