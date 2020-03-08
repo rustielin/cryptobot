@@ -76,11 +76,25 @@ rp(requestOptions).then(response => {
     body: {
         // hardcoded for now lol
         text: '[' + timestamp + '] Bitcoin Price:' + price + ", hourly change: " + change + "%",
-        attachments: [
+        blocks: [
           {
-            fallback: "uwu i'm a fallback text! don't look at me >:(",
+            type: "image",
             image_url: IMAGE_URL,
-            thumb_url: IMAGE_URL,
+            alt_text: "Price of Bitcoin over time"
+          },
+          {
+            type: "actions",
+            elements: [
+              {
+                type: "button",
+                url: IMAGE_URL,
+                text: {
+                  type: "plain_text",
+                  text: "View updated graph",
+                  emoji: false
+                }
+              }
+            ]
           }
         ]
     },
