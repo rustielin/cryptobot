@@ -21,22 +21,28 @@ DRY=0
 # utility function to log with timestamp
 # XXX: probably add a verbose option
 log() {
-    echo $(date): "$@" >> $LOG_PATH
+    if [[ $verbose -eq 1 ]]; then
+        echo $(date): "$@" | tee -a $LOG_PATH
+    else
+        echo $(date): "$@" >> $LOG_PATH
+    fi
 }
 
 print_usage() {
-    echo "usage: ./test.sh [hid]"
+    echo "usage: ./test.sh [hidv]"
     echo "    -h      print help"
     echo "    -i      enter python interactive mode after execution"
     echo "    -d      dry run, on calculating graph"
+    echo "    -v      verbose, dumping logs to stdout"
     exit
 }
 
-while getopts 'hid' flag; do
+while getopts 'hidv' flag; do
     case "${flag}" in 
-        i) I="-i" ;;
-        h) print_usage ;;
-        d) DRY=1
+        i) I="-i"; DRY=1 ;; # interactive implies dry-run
+        h) print_usage ;; 
+        d) DRY=1 ;;
+        v) verbose=1
     esac
 done
 
@@ -54,11 +60,16 @@ log "Starting ./run.sh, scraping every $SLEEP_SECS seconds..."
 # dry run that prints test output, and exits
 if [ "$DRY" -eq "1" ]; then
     log "--------- MANUAL DRY RUN ---------"
+
     export TEST_FILE="btc-usd_test-$(echo $RANDOM).png"
     export PNG_PATH="$HOME/public_html/test/$TEST_FILE"
+
+    # make the test dir if it doesn't exist
+    mkdir -p $HOME/public_html/test/
     touch $PNG_PATH
+
     log "TEST OUTPUT: https://www.ocf.berkeley.edu/~$USER/test/$TEST_FILE"
-    python -W $I ignore write_graph.py >> $LOG_PATH
+    python -W ignore $I write_graph.py
     exit
 fi
 
