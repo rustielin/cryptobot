@@ -2,5 +2,10 @@ slack_webhook.txt
 node_modules
 config.js
 venv
+
+# ocf related
 .vscode
 .nfs*
+
+# test outputs
+test.png
